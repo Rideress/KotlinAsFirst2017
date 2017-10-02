@@ -19,7 +19,7 @@ class Tests {
     fun isNumberHappy() {
         assertTrue(isNumberHappy(1533))
         assertTrue(isNumberHappy(9009))
-        assertFalse(isNumberHappy(3644))
+        assertFalse(isNumberHappy(3049))
     }
 
     @Test
