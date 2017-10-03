@@ -2,6 +2,8 @@
 package lesson2.task1
 
 import lesson1.task1.discriminant
+import lesson1.task1.sqr
+import java.lang.Math
 
 /**
  * Пример
@@ -75,7 +77,7 @@ fun whichRookThreatens(kingX: Int, kingY: Int,
     return if  ((kingX == rookX1 || kingY == rookY1) && (kingX == rookX2 || kingY == rookY2)) 3
     else if (kingX == rookX1 || kingY == rookY1) 1
     else if (kingX == rookX2 || kingY == rookY2) 2
-    else  return 0
+    else  return  0
 }
 
 
@@ -101,8 +103,13 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int = TODO()
+fun triangleKind(a: Double, b: Double, c: Double): Int {
+    return if (sqr(a) + sqr(b) == sqr(c) || sqr(c) + sqr(b) == sqr(a) || sqr(a) + sqr(c) == sqr(b))  1
+    else if (sqr(a) + sqr(b) < sqr(c) || sqr(c) + sqr(b) < sqr(a) || sqr(a) + sqr(c) < sqr(b))  2
+    else if (sqr(a) + sqr(b) > sqr(c) || sqr(c) + sqr(b) > sqr(a) || sqr(a) + sqr(c) > sqr(b))  0
+    else return ((a + b <= c) || (a + c <= b) || (b + c <= a))  -1
 
+}
 /**
  * Средняя
  *
