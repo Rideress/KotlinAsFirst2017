@@ -107,7 +107,7 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
     return if ((a + b <= c) || (a + c <= b) || (b + c <= a)) -1
     else if (sqr(a) + sqr(b) == sqr(c) || sqr(c) + sqr(b) == sqr(a) || sqr(a) + sqr(c) == sqr(b))  1
     else if (sqr(a) + sqr(b) < sqr(c) || sqr(c) + sqr(b) < sqr(a) || sqr(a) + sqr(c) < sqr(b))  2
-    else if (sqr(a) + sqr(b) > sqr(c) || sqr(c) + sqr(b) > sqr(a) || sqr(a) + sqr(c) > sqr(b)) 0 else 0
+    else 0
 
 }
 /**
