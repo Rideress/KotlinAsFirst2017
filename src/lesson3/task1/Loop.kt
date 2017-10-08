@@ -71,10 +71,7 @@ fun digitNumber(n: Int): Int =
  * Ряд Фибоначчи определён следующим образом: fib(1) = 1, fib(2) = 1, fib(n+2) = fib(n) + fib(n+1)
  */
 fun fib(n: Int): Int {
-    for (i in 1..n) {
 
-    }
-}
 /**
  * Простая
  *
