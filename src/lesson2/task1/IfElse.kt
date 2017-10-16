@@ -95,7 +95,12 @@ fun whichRookThreatens(kingX: Int, kingY: Int,
  */
 fun rookOrBishopThreatens(kingX: Int, kingY: Int,
                           rookX: Int, rookY: Int,
-                          bishopX: Int, bishopY: Int): Int = TODO()
+                          bishopX: Int, bishopY: Int): Int {
+   return if ((kingX == rookX || kingY == rookY) && (Math.abs(kingX - bishopX) == Math.abs(kingY - bishopY))) 3
+    else if (kingX == rookX || kingY == rookY) 1
+    else if (Math.abs(kingX - bishopX) == Math.abs(kingY - bishopY)) 2
+       else  0
+}
 
 /**
  * Простая
@@ -119,4 +124,7 @@ fun triangleKind(a: Double, b: Double, c: Double): Int {
  * Найти длину пересечения отрезков AB и CD.
  * Если пересечения нет, вернуть -1.
  */
-fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int = TODO()
+fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
+   return if (Math.min(b, d) - Math.max(a, c) >= 0) Math.min(b, d) - Math.max(a, c)
+    else  -1
+}
