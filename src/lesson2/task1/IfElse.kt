@@ -110,11 +110,23 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double): Int {
-    return if ((a + b <= c) || (a + c <= b) || (b + c <= a)) -1
-    else if (sqr(a) + sqr(b) == sqr(c) || sqr(c) + sqr(b) == sqr(a) || sqr(a) + sqr(c) == sqr(b))  1
-    else if (sqr(a) + sqr(b) < sqr(c) || sqr(c) + sqr(b) < sqr(a) || sqr(a) + sqr(c) < sqr(b))  2
-    else 0
+fun triangleKind(a: Double, b: Double, c: Double):Int {
+   var max = 0.0
+    var min = 0.0
+    var med = 0.0
+    if (a > b)  {max = a}
+    else max = b
+    if (c > max) {max = c}
+    if (a < b) {min = a}
+    else min = b
+    med = (a + b + c -(max + min))
+     return when {
+     min + med <= max                   -> -1
+     sqr(min) + sqr(med) == sqr(max)    -> 1
+         sqr(min) + sqr(med) < sqr(max) -> 2
+        else                            -> 0
+    }
+
 }
 /**
  * Средняя
