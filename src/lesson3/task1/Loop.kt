@@ -77,7 +77,7 @@ fun fib(n: Int): Int {
     var numb2 = 1
     var numb3 = 0
     if (n in 1..2) return 1
-    else for (i in 3..n) {
+    for (i in 3..n) {
         numb3 = numb1 + numb2
         numb1 = numb2
         numb2 = numb3
@@ -93,10 +93,9 @@ fun fib(n: Int): Int {
 fun lcm(m: Int, n: Int): Int {
     var k = 0
     if (m == n) return m
-    else while (m != n){
-    if (m > n) k = m - n
-    if (m < n) k = n - m }
-    return ((m*n)/k)
+    while (m != n){
+            if (m < n){ k = n - m }}
+    return (m*n)/k
 
 }
 /**
@@ -105,9 +104,11 @@ fun lcm(m: Int, n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    var m = 2
-    while (n % m !=0)
-    {m++}
+    var m = 1
+    for (i in 2..n){
+        m++
+        if (n % m == 0) break
+    }
     return m
 }
 /**
@@ -124,15 +125,14 @@ fun maxDivisor(n: Int): Int = n / minDivisor(n)
  * Взаимно простые числа не имеют общих делителей, кроме 1.
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
-fun isCoPrime(m: Int, n: Int): Boolean {
+fun isCoPrime(m: Int, n: Int): Boolean  {
     var k = 0
     if (n == m) return false
-    else while (m != n){
+    else while (m != n) {
         if (m > n) k = m - n
-        if (m < n) k = n - m }
- if (k != 1) return false
-    else return true
-
+        if (m < n) k = n - m
+    }
+    return (k == 1)
 }
 
 /**
@@ -143,7 +143,6 @@ fun isCoPrime(m: Int, n: Int): Boolean {
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
  */
 fun squareBetweenExists(m: Int, n: Int): Boolean = TODO()
-
 /**
  * Средняя
  *
@@ -168,8 +167,16 @@ fun cos(x: Double, eps: Double): Double = TODO()
  * Поменять порядок цифр заданного числа n на обратный: 13478 -> 87431.
  * Не использовать строки при решении задачи.
  */
-fun revert(n: Int): Int = TODO()
+fun revert(n: Int): Int {
+    var numb = n
+        var revertnumb = 0
 
+    while (numb > 0) {
+        revertnumb = revertnumb * 10 + numb % 10
+        numb /= 10
+    }
+    return revertnumb
+}
 /**
  * Средняя
  *
@@ -177,7 +184,7 @@ fun revert(n: Int): Int = TODO()
  * первая цифра равна последней, вторая -- предпоследней и так далее.
  * 15751 -- палиндром, 3653 -- нет.
  */
-fun isPalindrome(n: Int): Boolean = TODO()
+fun isPalindrome(n: Int): Boolean = revert(n) == n
 
 /**
  * Средняя
@@ -194,7 +201,24 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
  * 149162536496481100121144...
  * Например, 2-я цифра равна 4, 7-я 5, 12-я 6.
  */
-fun squareSequenceDigit(n: Int): Int = TODO()
+fun squareSequenceDigit(n: Int): Int  {
+    var i = 0
+    var numb = 0
+    var extnum = 0
+    while (numb < n) {
+        i++
+        numb += digitNumber(i * i)
+    }
+    extnum = i * i
+    for ( i in n..(numb - 1))
+    {
+        extnum /= 10
+    }
+    extnum %= 10
+    return extnum
+
+}
+
 
 /**
  * Сложная
@@ -203,6 +227,21 @@ fun squareSequenceDigit(n: Int): Int = TODO()
  * 1123581321345589144...
  * Например, 2-я цифра равна 1, 9-я 2, 14-я 5.
  */
-fun fibSequenceDigit(n: Int): Int = TODO()
+fun fibSequenceDigit(n: Int): Int  {
+    var i = 0
+    var numb = 0
+    var extnum = 0
+    while (numb < n) {
+        i++
+        numb += digitNumber(fib(i))
+    }
+        extnum = fib(i)
+    for ( i in n..(numb - 1)) {
+        extnum /= 10
+    }
+    extnum %= 10
+    return extnum
+
+}
 
 

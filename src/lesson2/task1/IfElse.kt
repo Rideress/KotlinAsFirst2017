@@ -55,7 +55,6 @@ fun timeForHalfWay(t1: Double, v1: Double,
         halfS < (S1 + S2) && halfS > S1  -> ((halfS - S1) / v2) + t1
         halfS < S1 -> halfS / v1
         halfS > (S1+ S2) && halfS < S3 -> (halfS - (S1 + S2)) / v3 + t1 + t2
-
         else  -> 0.0
     }
 }
@@ -76,12 +75,13 @@ fun whichRookThreatens(kingX: Int, kingY: Int,
                        rookX2: Int, rookY2: Int): Int {
     val rook1 = (kingX == rookX1 || kingY == rookY1)
     val rook2 = (kingX == rookX2 || kingY == rookY2)
-    return if  (rook1 && rook2) 3
-    else if(rook1) 1
-    else if (rook2) 2
-    else  return  0
+    return when {
+       (rook1 && rook2) -> 3
+       (rook1)          -> 1
+       (rook2)          -> 2
+       else             -> 0
+    }
 }
-
 
 /**
  * Простая
@@ -96,10 +96,14 @@ fun whichRookThreatens(kingX: Int, kingY: Int,
 fun rookOrBishopThreatens(kingX: Int, kingY: Int,
                           rookX: Int, rookY: Int,
                           bishopX: Int, bishopY: Int): Int {
-   return if ((kingX == rookX || kingY == rookY) && (Math.abs(kingX - bishopX) == Math.abs(kingY - bishopY))) 3
-    else if (kingX == rookX || kingY == rookY) 1
-    else if (Math.abs(kingX - bishopX) == Math.abs(kingY - bishopY)) 2
-       else  0
+    val bishopThrt = (Math.abs(kingX - bishopX) == Math.abs(kingY - bishopY))
+    val rookThrt = (kingX == rookX || kingY == rookY)
+    return when {
+        rookThrt && bishopThrt -> 3
+        rookThrt               -> 1
+        bishopThrt             -> 2
+        else                   -> 0
+    }
 }
 
 /**
@@ -111,23 +115,21 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
  * Если такой треугольник не существует, вернуть -1.
  */
 fun triangleKind(a: Double, b: Double, c: Double):Int {
-   var max = 0.0
+    var max = 0.0
     var min = 0.0
     var med = 0.0
-    if (a > b)  {max = a}
-    else max = b
-    if (c > max) {max = c}
-    if (a < b) {min = a}
-    else min = b
-    med = (a + b + c -(max + min))
-     return when {
-     min + med <= max                   -> -1
-     sqr(min) + sqr(med) == sqr(max)    -> 1
-         sqr(min) + sqr(med) < sqr(max) -> 2
-        else                            -> 0
+    max = Math.max(a, b)
+    if (c > max) {max = c }
+    min = Math.min(a, b)
+    if (c < min) {min = c}
+    med = (a + b + c - (max + min))
+    return when {
+         min + med <= max                   -> -1
+         sqr(min) + sqr(med) == sqr(max)    -> 1
+         sqr(min) + sqr(med) < sqr(max)     -> 2
+         else                               -> 0
     }
-
-}
+    }
 /**
  * Средняя
  *
@@ -138,5 +140,5 @@ fun triangleKind(a: Double, b: Double, c: Double):Int {
  */
 fun segmentLength(a: Int, b: Int, c: Int, d: Int): Int {
    return if (Math.min(b, d) - Math.max(a, c) >= 0) Math.min(b, d) - Math.max(a, c)
-    else  -1
+   else  -1
 }
