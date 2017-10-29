@@ -19,7 +19,7 @@ fun pointInsideCircle(x: Double, y: Double, x0: Double, y0: Double, r: Double) =
  * Четырехзначное число назовем счастливым, если сумма первых двух ее цифр равна сумме двух последних.
  * Определить, счастливое ли заданное число, вернуть true, если это так.
  */
-fun isNumberHappy(number: Int): Boolean = ((number / 10 % 10 + number  % 10) == (number / 100 % 10 + number / 1000))
+fun isNumberHappy(number: Int): Boolean = (number / 10 % 10 + number  % 10) == (number / 100 % 10 + number / 1000)
 /**
  * Простая
  *
@@ -54,9 +54,9 @@ fun brickPasses(a: Int, b: Int, c: Int, r: Int, s: Int): Boolean {
     var min = 0
     var med = 0
     max = Math.max(a, b)
-    if (c > max) {max = c }
+    max = Math.max(max, c)
     min = Math.min(a, b)
-    if (c < min) {min = c}
-    med = (a + b + c - (max + min))
-   return (min <= r) && (med <= s) || (min <= s) && (med <= r)
+    min = Math.min(min, c)
+    med = a + b + c - (max + min)
+   return min <= r && med <= s || min <= s && med <= r
 }

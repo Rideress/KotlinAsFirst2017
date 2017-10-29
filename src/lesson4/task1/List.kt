@@ -120,7 +120,7 @@ fun abs(v: List<Double>): Double {
  */
 fun mean(list: List<Double>): Double {
     return if (list.isEmpty())  0.0
-    else  list.sum() / list.size
+    else list.sum() / list.size
 }
 
 /**

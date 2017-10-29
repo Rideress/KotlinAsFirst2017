@@ -51,10 +51,9 @@ fun timeForHalfWay(t1: Double, v1: Double,
     val S2 = v2 * t2
     val S3 = v3 * t3
     val halfS = (S1 + S2 + S3) / 2
-    if (((halfS <= (S1 + S2)) && (halfS > S1)))  return ((halfS - S1) / v2) + t1
+    if ((halfS <= (S1 + S2)) && (halfS > S1)) return ((halfS - S1) / v2) + t1
     if (halfS <= S1) return halfS / v1
-    if (halfS >= (S1+ S2) && halfS < S3) return (halfS - (S1 + S2)) / v3 + t1 + t2
-    return 0.0
+    return (halfS - (S1 + S2)) / v3 + t1 + t2
 }
 
 
@@ -71,13 +70,13 @@ fun timeForHalfWay(t1: Double, v1: Double,
 fun whichRookThreatens(kingX: Int, kingY: Int,
                        rookX1: Int, rookY1: Int,
                        rookX2: Int, rookY2: Int): Int {
-    val rook1 = (kingX == rookX1 || kingY == rookY1)
-    val rook2 = (kingX == rookX2 || kingY == rookY2)
+    val rook1 = kingX == rookX1 || kingY == rookY1
+    val rook2 = kingX == rookX2 || kingY == rookY2
     return when {
-       (rook1 && rook2) -> 3
-       (rook1)          -> 1
-       (rook2)          -> 2
-       else             -> 0
+        rook1 && rook2 -> 3
+        rook1 -> 1
+        rook2 -> 2
+        else -> 0
     }
 }
 
@@ -112,22 +111,22 @@ fun rookOrBishopThreatens(kingX: Int, kingY: Int,
  * прямоугольным (вернуть 1) или тупоугольным (вернуть 2).
  * Если такой треугольник не существует, вернуть -1.
  */
-fun triangleKind(a: Double, b: Double, c: Double):Int {
+fun triangleKind(a: Double, b: Double, c: Double): Int {
     var max = 0.0
     var min = 0.0
     var med = 0.0
     max = Math.max(a, b)
-    if (c > max) {max = c }
+    max = Math.max(max, c)
     min = Math.min(a, b)
-    if (c < min) {min = c}
-    med = (a + b + c - (max + min))
+    min = Math.min(min, c)
+    med = a + b + c - (max + min)
     return when {
-         min + med <= max                   -> -1
-         sqr(min) + sqr(med) == sqr(max)    -> 1
-         sqr(min) + sqr(med) < sqr(max)     -> 2
-         else                               -> 0
+        min + med <= max -> -1
+        sqr(min) + sqr(med) == sqr(max) -> 1
+        sqr(min) + sqr(med) < sqr(max) -> 2
+        else -> 0
     }
-    }
+}
 /**
  * Средняя
  *
