@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson3.task1
 
 import lesson4.task1.convertToString
@@ -36,7 +37,7 @@ fun isPrime(n: Int): Boolean {
  */
 fun isPerfect(n: Int): Boolean {
     var sum = 1
-    for (m in 2..n/2) {
+    for (m in 2..n / 2) {
         if (n % m > 0) continue
         sum += m
         if (sum > n) break
@@ -63,7 +64,7 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  * Например, число 1 содержит 1 цифру, 456 -- 3 цифры, 65536 -- 5 цифр.
  */
 fun digitNumber(n: Int): Int =
-    if (Math.abs(n) in 0..9) 1 else digitNumber(n / 10) + 1
+        if (Math.abs(n) in 0..9) 1 else digitNumber(n / 10) + 1
 
 
 /**
@@ -84,6 +85,7 @@ fun fib(n: Int): Int {
     }
     return numb3
 }
+
 /**
  * Простая
  *
@@ -91,16 +93,17 @@ fun fib(n: Int): Int {
  * минимальное число k, которое делится и на m и на n без остатка
  */
 fun lcm(m: Int, n: Int): Int {
-    var k = 0
-    if (m == n) return m
-    while (m != n) {
-        if (m < n) {
-            k = n - m
-        }
+    var k = m
+    var s = n
+    if (k == 1 && s == 1) return 1
+    else if (s == k) return k
+    while (k != s) {
+        if (s < k) k -= s
+        else s -= k
     }
-    return (m * n) / k
-
+    return m / k * n
 }
+
 /**
  * Простая
  *
@@ -114,6 +117,7 @@ fun minDivisor(n: Int): Int {
     }
     return m
 }
+
 /**
  * Простая
  *
@@ -146,6 +150,7 @@ fun isCoPrime(m: Int, n: Int): Boolean {
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
  */
 fun squareBetweenExists(m: Int, n: Int): Boolean = TODO()
+
 /**
  * Средняя
  *
@@ -180,6 +185,7 @@ fun revert(n: Int): Int {
     }
     return revertnumb
 }
+
 /**
  * Средняя
  *
@@ -217,7 +223,6 @@ fun squareSequenceDigit(n: Int): Int {
         extnum /= 10
     }
     return extnum % 10
-
 }
 
 
@@ -241,7 +246,6 @@ fun fibSequenceDigit(n: Int): Int {
         extnum /= 10
     }
     return extnum % 10
-
 }
 
 
