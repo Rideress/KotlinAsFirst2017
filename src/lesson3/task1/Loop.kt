@@ -177,13 +177,12 @@ fun cos(x: Double, eps: Double): Double = TODO()
  */
 fun revert(n: Int): Int {
     var numb = n
-    var revertnumb = 0
-
+    var revertNumb = 0
     while (numb > 0) {
-        revertnumb = revertnumb * 10 + numb % 10
+        revertNumb = revertNumb * 10 + numb % 10
         numb /= 10
     }
-    return revertnumb
+    return revertNumb
 }
 
 /**
@@ -213,16 +212,15 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
 fun squareSequenceDigit(n: Int): Int {
     var i = 0
     var numb = 0
-    var extnum = 0
     while (numb < n) {
         i++
         numb += digitNumber(i * i)
     }
-    extnum = i * i
+    var extNum = i * i
     for (i in n..(numb - 1)) {
-        extnum /= 10
+        extNum /= 10
     }
-    return extnum % 10
+    return extNum % 10
 }
 
 
@@ -236,16 +234,15 @@ fun squareSequenceDigit(n: Int): Int {
 fun fibSequenceDigit(n: Int): Int {
     var i = 0
     var numb = 0
-    var extnum = 0
     while (numb < n) {
         i++
         numb += digitNumber(fib(i))
     }
-    extnum = fib(i)
+    var extNum = fib(i)
     for (i in n..(numb - 1)) {
-        extnum /= 10
+        extNum /= 10
     }
-    return extnum % 10
+    return extNum % 10
 }
 
 
