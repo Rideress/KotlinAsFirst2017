@@ -96,7 +96,7 @@ fun lcm(m: Int, n: Int): Int {
     var k = m
     var s = n
     if (k == 1 && s == 1) return 1
-    else if (s == k) return k
+    if (s == k) return k
     while (k != s) {
         if (s < k) k -= s
         else s -= k
@@ -133,13 +133,13 @@ fun maxDivisor(n: Int): Int = n / minDivisor(n)
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
 fun isCoPrime(m: Int, n: Int): Boolean {
-    var k = 0
-    if (n == m) return false
+    if (n == m && n != 1) return false
     else while (m != n) {
-        if (m > n) k = m - n
-        if (m < n) k = n - m
+        if (m > n)  m - n
+        if (m < n)  n - m
+        break
     }
-    return (k == 1)
+    return true
 }
 
 /**
@@ -216,11 +216,11 @@ fun squareSequenceDigit(n: Int): Int {
         i++
         numb += digitNumber(i * i)
     }
-    var extNum = i * i
+    var exitNum = i * i
     for (i in n..(numb - 1)) {
-        extNum /= 10
+        exitNum /= 10
     }
-    return extNum % 10
+    return exitNum % 10
 }
 
 
@@ -238,11 +238,11 @@ fun fibSequenceDigit(n: Int): Int {
         i++
         numb += digitNumber(fib(i))
     }
-    var extNum = fib(i)
+    var exitNum = fib(i)
     for (i in n..(numb - 1)) {
-        extNum /= 10
+        exitNum /= 10
     }
-    return extNum % 10
+    return exitNum % 10
 }
 
 
