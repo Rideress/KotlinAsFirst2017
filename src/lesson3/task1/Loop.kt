@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson3.task1
 
 import lesson4.task1.convertToString
@@ -36,7 +37,7 @@ fun isPrime(n: Int): Boolean {
  */
 fun isPerfect(n: Int): Boolean {
     var sum = 1
-    for (m in 2..n/2) {
+    for (m in 2..n / 2) {
         if (n % m > 0) continue
         sum += m
         if (sum > n) break
@@ -63,7 +64,7 @@ fun digitCountInNumber(n: Int, m: Int): Int =
  * Например, число 1 содержит 1 цифру, 456 -- 3 цифры, 65536 -- 5 цифр.
  */
 fun digitNumber(n: Int): Int =
-    if (Math.abs(n) in 0..9) 1 else digitNumber(n / 10) + 1
+        if (Math.abs(n) in 0..9) 1 else digitNumber(n / 10) + 1
 
 
 /**
@@ -84,6 +85,7 @@ fun fib(n: Int): Int {
     }
     return numb3
 }
+
 /**
  * Простая
  *
@@ -91,16 +93,17 @@ fun fib(n: Int): Int {
  * минимальное число k, которое делится и на m и на n без остатка
  */
 fun lcm(m: Int, n: Int): Int {
-    var k = 0
-    if (m == n) return m
-    while (m != n) {
-        if (m < n) {
-            k = n - m
-        }
+    var k = m
+    var s = n
+    if (k == 1 && s == 1) return 1
+    if (s == k) return k
+    while (k != s) {
+        if (s < k) k -= s
+        else s -= k
     }
-    return (m * n) / k
-
+    return m / k * n
 }
+
 /**
  * Простая
  *
@@ -114,6 +117,7 @@ fun minDivisor(n: Int): Int {
     }
     return m
 }
+
 /**
  * Простая
  *
@@ -129,13 +133,14 @@ fun maxDivisor(n: Int): Int = n / minDivisor(n)
  * Например, 25 и 49 взаимно простые, а 6 и 8 -- нет.
  */
 fun isCoPrime(m: Int, n: Int): Boolean {
-    var k = 0
-    if (n == m) return false
-    else while (m != n) {
-        if (m > n) k = m - n
-        if (m < n) k = n - m
+    var a = m
+    var b = n
+    if (a == b && b != 1) return false
+    else while (a != b) {
+        if (a > b) a -= b
+        else b -= a
     }
-    return (k == 1)
+    return (a == 1)
 }
 
 /**
@@ -146,6 +151,7 @@ fun isCoPrime(m: Int, n: Int): Boolean {
  * Например, для интервала 21..28 21 <= 5*5 <= 28, а для интервала 51..61 квадрата не существует.
  */
 fun squareBetweenExists(m: Int, n: Int): Boolean = TODO()
+
 /**
  * Средняя
  *
@@ -172,14 +178,14 @@ fun cos(x: Double, eps: Double): Double = TODO()
  */
 fun revert(n: Int): Int {
     var numb = n
-    var revertnumb = 0
-
+    var revertNumb = 0
     while (numb > 0) {
-        revertnumb = revertnumb * 10 + numb % 10
+        revertNumb = revertNumb * 10 + numb % 10
         numb /= 10
     }
-    return revertnumb
+    return revertNumb
 }
+
 /**
  * Средняя
  *
@@ -207,17 +213,15 @@ fun hasDifferentDigits(n: Int): Boolean = TODO()
 fun squareSequenceDigit(n: Int): Int {
     var i = 0
     var numb = 0
-    var extnum = 0
     while (numb < n) {
         i++
         numb += digitNumber(i * i)
     }
-    extnum = i * i
+    var exitNum = i * i
     for (i in n..(numb - 1)) {
-        extnum /= 10
+        exitNum /= 10
     }
-    return extnum % 10
-
+    return exitNum % 10
 }
 
 
@@ -231,17 +235,15 @@ fun squareSequenceDigit(n: Int): Int {
 fun fibSequenceDigit(n: Int): Int {
     var i = 0
     var numb = 0
-    var extnum = 0
     while (numb < n) {
         i++
         numb += digitNumber(fib(i))
     }
-    extnum = fib(i)
+    var exitNum = fib(i)
     for (i in n..(numb - 1)) {
-        extnum /= 10
+        exitNum /= 10
     }
-    return extnum % 10
-
+    return exitNum % 10
 }
 
 
