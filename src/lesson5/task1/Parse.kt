@@ -47,26 +47,41 @@ fun main(args: Array<String>) {
     if (line != null) {
         val seconds = timeStrToSeconds(line)
         if (seconds == -1) {
-            println("Введённая строка $line не соответствует формату ЧЧ:ММ:СС")
+            println("Достигнут <конец файла> в процессе чтения строки. Программа прервана")
         }
-        else {
-            println("Прошло секунд с начала суток: $seconds")
-        }
-    }
-    else {
-        println("Достигнут <конец файла> в процессе чтения строки. Программа прервана")
     }
 }
-
 /**
  * Средняя
  *
- * Дата представлена строкой вида "15 июля 2016".
+ * Дата представлена строкой вида "15 июля 2016
  * Перевести её в цифровой формат "15.07.2016".
  * День и месяц всегда представлять двумя цифрами, например: 03.04.2011.
  * При неверном формате входной строки вернуть пустую строку
  */
-fun dateStrToDigit(str: String): String = TODO()
+fun dateStrToDigit(str: String): String {
+    val parts = str.split(' ')
+    try {
+        if (parts.size != 3 ) return ""
+        return when {
+            parts[1] == "января" && parts[0].toInt() in 1..31  -> String.format("%02d.01.%d", parts[0].toInt(), parts[2].toInt())
+            parts[1] == "февраля" && parts[0].toInt() in 1..28 -> String.format("%02d.02.%d", parts[0].toInt(), parts[2].toInt())
+            parts[1] == "марта" && parts[0].toInt() in 1..31 -> String.format("%02d.03.%d", parts[0].toInt(), parts[2].toInt())
+            parts[1] == "апреля" && parts[0].toInt() in 1..30 -> String.format("%02d.04.%d", parts[0].toInt(), parts[2].toInt())
+            parts[1] == "мая" && parts[0].toInt() in 1..31 -> String.format("%02d.05.%d", parts[0].toInt(), parts[2].toInt())
+            parts[1] == "июня" && parts[0].toInt() in 1..30 -> String.format("%02d.06.%d", parts[0].toInt(), parts[2].toInt())
+            parts[1] == "июля" && parts[0].toInt() in 1..31 -> String.format("%02d.07.%d", parts[0].toInt(), parts[2].toInt())
+            parts[1] == "августа" && parts[0].toInt() in 1..31 -> String.format("%02d.08.%d", parts[0].toInt(), parts[2].toInt())
+            parts[1] == "сентября" && parts[0].toInt() in 1..30 -> String.format("%02d.09.%d", parts[0].toInt(), parts[2].toInt())
+            parts[1] == "октября" && parts[0].toInt() in 1..31 -> String.format("%02d.10.%d", parts[0].toInt(), parts[2].toInt())
+            parts[1] == "ноября" && parts[0].toInt() in 1..30  -> String.format("%02d.11.%d", parts[0].toInt(), parts[2].toInt())
+            parts[1] == "декабря" && parts[0].toInt() in 1..31 -> String.format("%02d.12.%d", parts[0].toInt(), parts[2].toInt())
+            else -> ""
+        }
+    } catch (e: NumberFormatException) {
+        return ""
+    }
+}
 
 /**
  * Средняя
@@ -75,8 +90,30 @@ fun dateStrToDigit(str: String): String = TODO()
  * Перевести её в строковый формат вида "15 июля 2016".
  * При неверном формате входной строки вернуть пустую строку
  */
-fun dateDigitToStr(digital: String): String = TODO()
-
+fun dateDigitToStr(digital: String): String {
+    val parts = digital.split('.')
+    try {
+        if (parts.size != 3 || parts[0].toInt() !in 1..31) return ""
+        else
+            return when {
+                parts[1] == "01" -> String.format("%d января %d", parts[0].toInt(), parts[2].toInt())
+                parts[1] == "02" -> String.format("%d февраля %d", parts[0].toInt(), parts[2].toInt())
+                parts[1] == "03" -> String.format("%d марта %d", parts[0].toInt(), parts[2].toInt())
+                parts[1] == "04" -> String.format("%d апреля %d", parts[0].toInt(), parts[2].toInt())
+                parts[1] == "05" -> String.format("%d мая %d", parts[0].toInt(), parts[2].toInt())
+                parts[1] == "06" -> String.format("%d июня %d", parts[0].toInt(), parts[2].toInt())
+                parts[1] == "07" -> String.format("%d июля %d", parts[0].toInt(), parts[2].toInt())
+                parts[1] == "08" -> String.format("%d авгутса%d", parts[0].toInt(), parts[2].toInt())
+                parts[1] == "09" -> String.format("%d сентября %d", parts[0].toInt(), parts[2].toInt())
+                parts[1] == "10" -> String.format("%d октября %d", parts[0].toInt(), parts[2].toInt())
+                parts[1] == "11" -> String.format("%d ноября %d", parts[0].toInt(), parts[2].toInt())
+                parts[1] == "12" -> String.format("%d декабря %d", parts[0].toInt(), parts[2].toInt())
+                else -> ""
+            }
+    } catch (e: NumberFormatException) {
+        return ""
+    }
+}
 /**
  * Средняя
  *
@@ -135,7 +172,18 @@ fun plusMinus(expression: String): Int = TODO()
  * Вернуть индекс начала первого повторяющегося слова, или -1, если повторов нет.
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
-fun firstDuplicateIndex(str: String): Int = TODO()
+fun firstDuplicateIndex(str: String): Int {
+    val words = str.toLowerCase().split(' ')
+    var k = 0
+    if (words.size == 1) return -1
+    for (i in 0 until words.size) {
+        if (words[i] == words[i + 1]) break
+        else k += 1
+    }
+    val matchResult = Regex(str).find(words[k])
+    if (matchResult == null) return -1
+    return matchResult.range.first
+}
 
 /**
  * Сложная

@@ -220,7 +220,16 @@ fun factorizeToString(n: Int): String = factorize(n).joinToString( separator = "
  * Результат перевода вернуть в виде списка цифр в base-ичной системе от старшей к младшей,
  * например: n = 100, base = 4 -> (1, 2, 1, 0) или n = 250, base = 14 -> (1, 3, 12)
  */
-fun convert(n: Int, base: Int): List<Int> = TODO()
+fun convert(n: Int, base: Int): List<Int> {
+    var numb = n
+    val ListOfNumb = mutableListOf<Int>()
+    if (numb == 1) return listOf(1)
+    while (numb != 0) {
+        ListOfNumb.add(numb % base)
+        numb /= base
+    }
+    return ListOfNumb.reversed()
+}
 
 /**
  * Сложная
@@ -230,7 +239,17 @@ fun convert(n: Int, base: Int): List<Int> = TODO()
  * строчными буквами: 10 -> a, 11 -> b, 12 -> c и так далее.
  * Например: n = 100, base = 4 -> 1210, n = 250, base = 14 -> 13c
  */
-fun convertToString(n: Int, base: Int): String = TODO()
+fun convertToString(n: Int, base: Int): String  {
+    val listOfChar = mutableListOf<Char>()
+    val result = convert(n, base)
+    for (element in result)
+        when
+        {
+            element <= 9 -> listOfChar.add('0' + element)
+            element > 9 -> listOfChar.add('a' + element - 10)
+        }
+    return listOfChar.joinToString("")
+}
 
 /**
  * Средняя
@@ -239,7 +258,13 @@ fun convertToString(n: Int, base: Int): String = TODO()
  * из системы счисления с основанием base в десятичную.
  * Например: digits = (1, 3, 12), base = 14 -> 250
  */
-fun decimal(digits: List<Int>, base: Int): Int = TODO()
+fun decimal(digits: List<Int>, base: Int): Int {
+    var num = 0.0
+    for (i in 0 until digits.size) {
+        num += digits[i] * Math.pow(base.toDouble(), (digits.size - 1 - i).toDouble() )
+    }
+    return num.toInt()
+}
 
 /**
  * Сложная
@@ -250,7 +275,14 @@ fun decimal(digits: List<Int>, base: Int): Int = TODO()
  * 10 -> a, 11 -> b, 12 -> c и так далее.
  * Например: str = "13c", base = 14 -> 250
  */
-fun decimalFromString(str: String, base: Int): Int = TODO()
+fun decimalFromString(str: String, base: Int): Int {
+    val result = mutableListOf<Int>()
+    for (char in str) {
+        if (char.toInt()-48 <= 9) result.add(char.toInt()-48)
+        else if (char.toInt() >= 97) result.add(char.toInt() - 87)
+        }
+    return decimal(result, base)
+}
 
 /**
  * Сложная
