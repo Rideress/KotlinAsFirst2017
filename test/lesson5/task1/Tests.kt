@@ -94,6 +94,7 @@ class Tests {
         assertEquals(9, firstDuplicateIndex("Он пошёл в в школу"))
         assertEquals(40, firstDuplicateIndex("Яблоко упало на ветку с ветки оно упало на на землю"))
         assertEquals(9, firstDuplicateIndex("Мы пошли прямо Прямо располагался магазин"))
+        assertEquals(-1, firstDuplicateIndex("( W J 9 Y % ] > a ? f * 6 e % w { B s - 0 Z g * b = w h c 4 ' B > T 8 : d 3 f 2 Q X / ( : < g * b = w h c 4 ' B > T 8 : d 3 f 2 Q X / ( : < u N a 2 b L ` * 6 N , r H ) 0 r L a K B ( G ? ; / a % v 6 f V d V 8 d $ l E = ; k 3 a M s o b e 5 k 6 F 7 R . @ x 1 y ) 0 r L a K B ( G ? ; / a % v 6 f V d V 8 d $ l E = ; k 3 a M s o b e 5 k 6 F 7 R . @ x 1 y z ` j 3 j y c \\ , V Q 2 y v A T 0 l ^ ` V l M ] 2 C a ` O @ H \" m P E V G"))
     }
 
     @Test
