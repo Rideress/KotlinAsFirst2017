@@ -61,11 +61,7 @@ fun main(args: Array<String>) {
  * День и месяц всегда представлять двумя цифрами, например: 03.04.2011.
  * При неверном формате входной строки вернуть пустую строку
  */
-fun dateStrToDigit(str: String): String = TODO()
-/**
- * проверка мешают ли данные программы сборк на котоеде
- *
-{
+fun dateStrToDigit(str: String): String {
     val parts = str.split(' ')
     val date = mutableListOf<String>()
     try {
@@ -92,7 +88,7 @@ fun dateStrToDigit(str: String): String = TODO()
         return ""
     }
 }
-*/
+
 
 /**
  * Средняя
@@ -101,11 +97,7 @@ fun dateStrToDigit(str: String): String = TODO()
  * Перевести её в строковый формат вида "15 июля 2016".
  * При неверном формате входной строки вернуть пустую строку
  */
-fun dateDigitToStr(digital: String): String = TODO()
-/**
- * проверка на то, мешают ли эти программы сборке на котоеде
- *
- * {
+fun dateDigitToStr(digital: String): String {
     val parts = digital.split('.')
     val date = mutableListOf<String>()
     try {
@@ -132,7 +124,7 @@ fun dateDigitToStr(digital: String): String = TODO()
         return ""
     }
 }
-*/
+
 
 /**
  *
