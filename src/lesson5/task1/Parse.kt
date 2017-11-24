@@ -1,4 +1,5 @@
 @file:Suppress("UNUSED_PARAMETER")
+
 package lesson5.task1
 
 /**
@@ -51,6 +52,7 @@ fun main(args: Array<String>) {
         }
     }
 }
+
 /**
  * Средняя
  *
@@ -59,7 +61,11 @@ fun main(args: Array<String>) {
  * День и месяц всегда представлять двумя цифрами, например: 03.04.2011.
  * При неверном формате входной строки вернуть пустую строку
  */
-fun dateStrToDigit(str: String): String {
+fun dateStrToDigit(str: String): String = TODO()
+/**
+ * проверка мешают ли данные программы сборк на котоеде
+ *
+{
     val parts = str.split(' ')
     val date = mutableListOf<String>()
     try {
@@ -86,6 +92,7 @@ fun dateStrToDigit(str: String): String {
         return ""
     }
 }
+*/
 
 /**
  * Средняя
@@ -94,7 +101,11 @@ fun dateStrToDigit(str: String): String {
  * Перевести её в строковый формат вида "15 июля 2016".
  * При неверном формате входной строки вернуть пустую строку
  */
-fun dateDigitToStr(digital: String): String {
+fun dateDigitToStr(digital: String): String = TODO()
+/**
+ * проверка на то, мешают ли эти программы сборке на котоеде
+ *
+ * {
     val parts = digital.split('.')
     val date = mutableListOf<String>()
     try {
@@ -121,7 +132,10 @@ fun dateDigitToStr(digital: String): String {
         return ""
     }
 }
+*/
+
 /**
+ *
  * Средняя
  *
  * Номер телефона задан строкой вида "+7 (921) 123-45-67".
@@ -133,11 +147,8 @@ fun dateDigitToStr(digital: String): String {
  * Все символы в номере, кроме цифр, пробелов и +-(), считать недопустимыми.
  * При неверном формате вернуть пустую строку
  */
-fun flattenPhoneNumber(phone: String): String = TODO() /**{
-    val ph = phone.split("").filter{ it != " " && it != ")" && it != "(" && it != "-"}
-    return ph.joinToString(separator = "")
-    return
-    }*/
+fun flattenPhoneNumber(phone: String): String = TODO()
+
 /**
  * Средняя
  *
@@ -190,7 +201,7 @@ fun firstDuplicateIndex(str: String): Int {
         if (words[i] == words[i + 1]) break
         else index += words[i].length + 1
     }
-   return index
+    return index
 }
 
 /**
@@ -204,11 +215,7 @@ fun firstDuplicateIndex(str: String): Int {
  * или пустую строку при нарушении формата строки.
  * Все цены должны быть положительными
  */
-fun mostExpensive(description: String): List<String> = TODO() /** {
-    var list = description.split("").filter{ it != ";" }
-    return list
-
-}*/
+fun mostExpensive(description: String): List<String> = TODO()
 
 /**
  * Сложная
