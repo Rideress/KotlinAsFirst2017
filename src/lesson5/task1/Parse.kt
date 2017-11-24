@@ -135,7 +135,6 @@ fun dateDigitToStr(digital: String): String {
  */
 fun flattenPhoneNumber(phone: String): String = TODO() /**{
     val ph = phone.split("").filter{ it != " " && it != ")" && it != "(" && it != "-"}
-    if
     return ph.joinToString(separator = "")
     return
     }*/
