@@ -280,8 +280,8 @@ fun decimal(digits: List<Int>, base: Int): Int {
 fun decimalFromString(str: String, base: Int): Int {
     val result = mutableListOf<Int>()
     for (char in str) {
-        if (char.toInt()-48 <= 9) result.add(char.toInt()-48)
-        else if (char.toInt() >= 97) result.add(char.toInt() - 87)
+        if (char in '0'..'9') result.add(char - '0')
+        else if (char  in 'a'..'z') result.add((char - 'a') + 10)
         }
     return decimal(result, base)
 }

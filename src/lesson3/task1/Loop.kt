@@ -111,9 +111,11 @@ fun lcm(m: Int, n: Int): Int {
  */
 fun minDivisor(n: Int): Int {
     var m = 1
-    for (i in 2..n) {
+    val sq = Math.sqrt(n.toDouble()).toInt()
+    for (i in 2..sq + 1) {
         m++
-        if (n % m == 0) break
+        if (n % i == 0) break
+        else if (i == sq + 1) return n
     }
     return m
 }

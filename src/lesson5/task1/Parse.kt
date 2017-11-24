@@ -61,23 +61,27 @@ fun main(args: Array<String>) {
  */
 fun dateStrToDigit(str: String): String {
     val parts = str.split(' ')
+    val date = mutableListOf<String>()
     try {
-        if (parts.size != 3 ) return ""
-        return when {
-            parts[1] == "января" && parts[0].toInt() in 1..31  -> String.format("%02d.01.%d", parts[0].toInt(), parts[2].toInt())
-            parts[1] == "февраля" && parts[0].toInt() in 1..28 -> String.format("%02d.02.%d", parts[0].toInt(), parts[2].toInt())
-            parts[1] == "марта" && parts[0].toInt() in 1..31 -> String.format("%02d.03.%d", parts[0].toInt(), parts[2].toInt())
-            parts[1] == "апреля" && parts[0].toInt() in 1..30 -> String.format("%02d.04.%d", parts[0].toInt(), parts[2].toInt())
-            parts[1] == "мая" && parts[0].toInt() in 1..31 -> String.format("%02d.05.%d", parts[0].toInt(), parts[2].toInt())
-            parts[1] == "июня" && parts[0].toInt() in 1..30 -> String.format("%02d.06.%d", parts[0].toInt(), parts[2].toInt())
-            parts[1] == "июля" && parts[0].toInt() in 1..31 -> String.format("%02d.07.%d", parts[0].toInt(), parts[2].toInt())
-            parts[1] == "августа" && parts[0].toInt() in 1..31 -> String.format("%02d.08.%d", parts[0].toInt(), parts[2].toInt())
-            parts[1] == "сентября" && parts[0].toInt() in 1..30 -> String.format("%02d.09.%d", parts[0].toInt(), parts[2].toInt())
-            parts[1] == "октября" && parts[0].toInt() in 1..31 -> String.format("%02d.10.%d", parts[0].toInt(), parts[2].toInt())
-            parts[1] == "ноября" && parts[0].toInt() in 1..30  -> String.format("%02d.11.%d", parts[0].toInt(), parts[2].toInt())
-            parts[1] == "декабря" && parts[0].toInt() in 1..31 -> String.format("%02d.12.%d", parts[0].toInt(), parts[2].toInt())
-            else -> ""
-        }
+        if (parts.size != 3) return ""
+        date.add(twoDigitStr(parts[0].toInt()))
+        date.add(when {
+            parts[1] == "января" && parts[0].toInt() in 1..31 -> "01"
+            parts[1] == "февраля" && parts[0].toInt() in 1..29 -> "02"
+            parts[1] == "марта" && parts[0].toInt() in 1..31 -> "03"
+            parts[1] == "апреля" && parts[0].toInt() in 1..30 -> "04"
+            parts[1] == "мая" && parts[0].toInt() in 1..31 -> "05"
+            parts[1] == "июня" && parts[0].toInt() in 1..30 -> "06"
+            parts[1] == "июля" && parts[0].toInt() in 1..31 -> "07"
+            parts[1] == "августа" && parts[0].toInt() in 1..31 -> "08"
+            parts[1] == "сентября" && parts[0].toInt() in 1..30 -> "09"
+            parts[1] == "октября" && parts[0].toInt() in 1..31 -> "10"
+            parts[1] == "ноября" && parts[0].toInt() in 1..30 -> "11"
+            parts[1] == "декабря" && parts[0].toInt() in 1..31 -> "12"
+            else -> return ""
+        })
+        date.add(parts[2])
+        return date.joinToString(separator = ".")
     } catch (e: NumberFormatException) {
         return ""
     }
@@ -92,24 +96,27 @@ fun dateStrToDigit(str: String): String {
  */
 fun dateDigitToStr(digital: String): String {
     val parts = digital.split('.')
+    val date = mutableListOf<String>()
     try {
         if (parts.size != 3 || parts[0].toInt() !in 1..31) return ""
-        else
-            return when {
-                parts[1] == "01" -> String.format("%d января %d", parts[0].toInt(), parts[2].toInt())
-                parts[1] == "02" -> String.format("%d февраля %d", parts[0].toInt(), parts[2].toInt())
-                parts[1] == "03" -> String.format("%d марта %d", parts[0].toInt(), parts[2].toInt())
-                parts[1] == "04" -> String.format("%d апреля %d", parts[0].toInt(), parts[2].toInt())
-                parts[1] == "05" -> String.format("%d мая %d", parts[0].toInt(), parts[2].toInt())
-                parts[1] == "06" -> String.format("%d июня %d", parts[0].toInt(), parts[2].toInt())
-                parts[1] == "07" -> String.format("%d июля %d", parts[0].toInt(), parts[2].toInt())
-                parts[1] == "08" -> String.format("%d августа%d", parts[0].toInt(), parts[2].toInt())
-                parts[1] == "09" -> String.format("%d сентября %d", parts[0].toInt(), parts[2].toInt())
-                parts[1] == "10" -> String.format("%d октября %d", parts[0].toInt(), parts[2].toInt())
-                parts[1] == "11" -> String.format("%d ноября %d", parts[0].toInt(), parts[2].toInt())
-                parts[1] == "12" -> String.format("%d декабря %d", parts[0].toInt(), parts[2].toInt())
-                else -> ""
-            }
+        date.add(parts[0].toInt().toString())
+        date.add(when {
+            parts[1] == "01" && parts[0].toInt() in 1..31 -> "января"
+            parts[1] == "02" && parts[0].toInt() in 1..29 -> "февраля"
+            parts[1] == "03" && parts[0].toInt() in 1..31 -> "марта"
+            parts[1] == "04" && parts[0].toInt() in 1..30 -> "апреля"
+            parts[1] == "05" && parts[0].toInt() in 1..31 -> "мая"
+            parts[1] == "06" && parts[0].toInt() in 1..30 -> "июня"
+            parts[1] == "07" && parts[0].toInt() in 1..31 -> "июля"
+            parts[1] == "08" && parts[0].toInt() in 1..31 -> "августа"
+            parts[1] == "09" && parts[0].toInt() in 1..30 -> "сентября"
+            parts[1] == "10" && parts[0].toInt() in 1..31 -> "октября"
+            parts[1] == "11" && parts[0].toInt() in 1..30 -> "ноября"
+            parts[1] == "12" && parts[0].toInt() in 1..31 -> "декабря"
+            else -> return ""
+        })
+        date.add(parts[2])
+        return date.joinToString(separator = " ")
     } catch (e: NumberFormatException) {
         return ""
     }
@@ -126,8 +133,12 @@ fun dateDigitToStr(digital: String): String {
  * Все символы в номере, кроме цифр, пробелов и +-(), считать недопустимыми.
  * При неверном формате вернуть пустую строку
  */
-fun flattenPhoneNumber(phone: String): String = TODO()
-
+fun flattenPhoneNumber(phone: String): String = TODO() /**{
+    val ph = phone.split("").filter{ it != " " && it != ")" && it != "(" && it != "-"}
+    if
+    return ph.joinToString(separator = "")
+    return
+    }*/
 /**
  * Средняя
  *
@@ -174,15 +185,13 @@ fun plusMinus(expression: String): Int = TODO()
  */
 fun firstDuplicateIndex(str: String): Int {
     val words = str.toLowerCase().split(' ')
-    var k = 0
+    var index = 0
     if (words.size == 1) return -1
-    for (i in 0 until words.size) {
+    for (i in 0 until words.size - 1) {
         if (words[i] == words[i + 1]) break
-        else k += 1
+        else index += words[i].length + 1
     }
-    val matchResult = Regex(str).find(words[k])
-    if (matchResult == null) return -1
-    return matchResult.range.first
+   return index
 }
 
 /**
@@ -196,7 +205,10 @@ fun firstDuplicateIndex(str: String): Int {
  * или пустую строку при нарушении формата строки.
  * Все цены должны быть положительными
  */
-fun mostExpensive(description: String): String = TODO()
+fun mostExpensive(description: String): List<String> = TODO() /** {
+    var list = description.split("").filter{ it != ";" }
+    return list
+}*/
 
 /**
  * Сложная
