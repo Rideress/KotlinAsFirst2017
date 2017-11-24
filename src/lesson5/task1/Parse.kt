@@ -207,6 +207,7 @@ fun firstDuplicateIndex(str: String): Int {
 fun mostExpensive(description: String): List<String> = TODO() /** {
     var list = description.split("").filter{ it != ";" }
     return list
+
 }*/
 
 /**
