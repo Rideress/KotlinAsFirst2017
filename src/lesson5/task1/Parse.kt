@@ -207,7 +207,7 @@ fun firstDuplicateIndex(str: String): Int {
  * или пустую строку при нарушении формата строки.
  * Все цены должны быть положительными
  */
-fun mostExpensive(description: String): List<String> = TODO()
+fun mostExpensive(description: String): String = TODO()
 
 /**
  * Сложная
