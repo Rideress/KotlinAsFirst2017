@@ -139,8 +139,10 @@ fun dateDigitToStr(digital: String): String {
  * Все символы в номере, кроме цифр, пробелов и +-(), считать недопустимыми.
  * При неверном формате вернуть пустую строку
  */
-fun flattenPhoneNumber(phone: String): String = TODO()
-
+fun flattenPhoneNumber(phone: String): String  {
+    return if (phone.contains(Regex("[^0-9+ ()-]"))) ""
+    else Regex("""[ ()-]""").replace(phone, "")
+}
 /**
  * Средняя
  *
@@ -191,11 +193,10 @@ fun firstDuplicateIndex(str: String): Int {
         var index = 0
         if (words.size == 1) return -1
         for (i in 0 until words.size - 1) {
-            if (words[i] == "/" || words[i] == "+" || words[i] == "_" || words[i] == "}" || words[i] == "{") return -1
             if (words[i] == words[i + 1]) break
             else index += words[i].length + 1
         }
-        return index
+        return if (index == str.length - 1) -1 else index
     } catch (e: NumberFormatException) {
         return -1
     }
@@ -212,7 +213,16 @@ fun firstDuplicateIndex(str: String): Int {
  * или пустую строку при нарушении формата строки.
  * Все цены должны быть положительными
  */
-fun mostExpensive(description: String): String = TODO()
+fun mostExpensive(description: String): String {
+    val newStr = Regex("""[;]""").replace(description, "")
+    var maxIndex = 1
+    val listOfGoods = newStr.split(' ')
+    for (i in 3 until listOfGoods.size step 2) {
+        if (listOfGoods[i].toDouble() > listOfGoods[i - 2].toDouble()) maxIndex = i
+    else maxIndex = i -2
+    }
+    return listOfGoods[maxIndex - 1]
+}
 
 /**
  * Сложная
