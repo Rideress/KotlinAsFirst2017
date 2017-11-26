@@ -191,7 +191,7 @@ fun firstDuplicateIndex(str: String): Int {
         var index = 0
         if (words.size == 1) return -1
         for (i in 0 until words.size - 1) {
-            if (words[i] == "/" || words[i] == "+" || words[i] in "0".."9") return -1
+            if (words[i] == "/" || words[i] == "+" || words[i] == "_" || words[i] == "}" || words[i] == "{") return -1
             if (words[i] == words[i + 1]) break
             else index += words[i].length + 1
         }
