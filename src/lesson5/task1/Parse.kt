@@ -62,31 +62,21 @@ fun main(args: Array<String>) {
  * При неверном формате входной строки вернуть пустую строку
  */
 fun dateStrToDigit(str: String): String {
+    val month = listOf<String>("января", "февраля", "марта", "апреля", "мая", "июня", "июля",
+            "августа", "сентября", "октября", "ноября", "декабря")
     val parts = str.split(' ')
     val date = mutableListOf<String>()
     try {
         if (parts.size != 3) return ""
         date.add(twoDigitStr(parts[0].toInt()))
-        date.add(when {
-            parts[1] == "января" && parts[0].toInt() in 1..31 -> "01"
-            parts[1] == "февраля" && parts[0].toInt() in 1..29 -> "02"
-            parts[1] == "марта" && parts[0].toInt() in 1..31 -> "03"
-            parts[1] == "апреля" && parts[0].toInt() in 1..30 -> "04"
-            parts[1] == "мая" && parts[0].toInt() in 1..31 -> "05"
-            parts[1] == "июня" && parts[0].toInt() in 1..30 -> "06"
-            parts[1] == "июля" && parts[0].toInt() in 1..31 -> "07"
-            parts[1] == "августа" && parts[0].toInt() in 1..31 -> "08"
-            parts[1] == "сентября" && parts[0].toInt() in 1..30 -> "09"
-            parts[1] == "октября" && parts[0].toInt() in 1..31 -> "10"
-            parts[1] == "ноября" && parts[0].toInt() in 1..30 -> "11"
-            parts[1] == "декабря" && parts[0].toInt() in 1..31 -> "12"
-            else -> return ""
-        })
+        val monthNumb = month.indexOf(parts[1])
+        if (monthNumb == -1) return ""
+        date.add(twoDigitStr(monthNumb + 1))
         date.add(parts[2])
-        return date.joinToString(separator = ".")
     } catch (e: NumberFormatException) {
         return ""
     }
+    return date.joinToString(".")
 }
 
 
@@ -98,26 +88,16 @@ fun dateStrToDigit(str: String): String {
  * При неверном формате входной строки вернуть пустую строку
  */
 fun dateDigitToStr(digital: String): String {
+    val month = listOf<String>("января", "февраля", "марта", "апреля", "мая", "июня", "июля",
+            "августа", "сентября", "октября", "ноября", "декабря")
     val parts = digital.split('.')
     val date = mutableListOf<String>()
     try {
         if (parts.size != 3 || parts[0].toInt() !in 1..31) return ""
         date.add(parts[0].toInt().toString())
-        date.add(when {
-            parts[1] == "01" && parts[0].toInt() in 1..31 -> "января"
-            parts[1] == "02" && parts[0].toInt() in 1..29 -> "февраля"
-            parts[1] == "03" && parts[0].toInt() in 1..31 -> "марта"
-            parts[1] == "04" && parts[0].toInt() in 1..30 -> "апреля"
-            parts[1] == "05" && parts[0].toInt() in 1..31 -> "мая"
-            parts[1] == "06" && parts[0].toInt() in 1..30 -> "июня"
-            parts[1] == "07" && parts[0].toInt() in 1..31 -> "июля"
-            parts[1] == "08" && parts[0].toInt() in 1..31 -> "августа"
-            parts[1] == "09" && parts[0].toInt() in 1..30 -> "сентября"
-            parts[1] == "10" && parts[0].toInt() in 1..31 -> "октября"
-            parts[1] == "11" && parts[0].toInt() in 1..30 -> "ноября"
-            parts[1] == "12" && parts[0].toInt() in 1..31 -> "декабря"
-            else -> return ""
-        })
+        val numb = parts[1].toInt() - 1
+        if (numb !in 0..11) return  ""
+        date.add(month[numb])
         date.add(parts[2])
         return date.joinToString(separator = " ")
     } catch (e: NumberFormatException) {
@@ -188,7 +168,6 @@ fun plusMinus(expression: String): Int = TODO()
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
 fun firstDuplicateIndex(str: String): Int {
-    try {
         val words = str.toLowerCase().split(' ')
         var index = 0
         if (words.size == 1) return -1
@@ -197,9 +176,6 @@ fun firstDuplicateIndex(str: String): Int {
             else index += words[i].length + 1
         }
         return if (index == str.length - 1) -1 else index
-    } catch (e: NumberFormatException) {
-        return -1
-    }
 }
 
 /**

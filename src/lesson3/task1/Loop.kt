@@ -112,10 +112,10 @@ fun lcm(m: Int, n: Int): Int {
 fun minDivisor(n: Int): Int {
     var m = 1
     val sq = Math.sqrt(n.toDouble()).toInt()
-    for (i in 2..sq + 1) {
+    if (isPrime(n)) return n
+    else for (i in 2..sq + 1) {
         m++
         if (n % i == 0) break
-        else if (i == sq + 1) return n
     }
     return m
 }
@@ -142,7 +142,7 @@ fun isCoPrime(m: Int, n: Int): Boolean {
         if (a > b) a -= b
         else b -= a
     }
-    return (a == 1)
+    return a == 1
 }
 
 /**
