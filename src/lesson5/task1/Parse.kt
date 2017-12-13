@@ -72,7 +72,7 @@ fun dateStrToDigit(str: String): String {
         val monthNumb = month.indexOf(parts[1])
         if (monthNumb == -1) return ""
         date.add(twoDigitStr(monthNumb + 1))
-        date.add(parts[2])
+        date.add(parts[2].toInt().toString())
     } catch (e: NumberFormatException) {
         return ""
     }
