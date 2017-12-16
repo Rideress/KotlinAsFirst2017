@@ -116,13 +116,16 @@ fun rookTrajectory(start: Square, end: Square): List<Square> {
  * Слон может пройти через клетку (6, 4) к клетке (3, 7).
  */
 fun bishopMoveNumber(start: Square, end: Square): Int {
-    when {
-        (!start.inside() || !end.inside()) -> IllegalArgumentException()
-        start == end -> return 0
-        (start.column + start.row) % 2 != (end.column + end.row) % 2 -> return -1
-    }
-    return if (Math.abs(start.column - end.column) == Math.abs(start.row - end.row)) 1
-    else 2
+    if (start.inside() && end.inside()) {
+        return when {
+            start == end -> 0
+            Math.abs(start.column - end.column) == Math.abs(start.row - end.row) -> 1
+            (Math.abs(start.column - end.column) + Math.abs(start.row - end.row)) % 2 == 0 -> 2
+            else -> -1
+        }
+    } else
+        throw IllegalArgumentException("IllegalArgumentException")
+
 }
 
 /**
@@ -143,9 +146,20 @@ fun bishopMoveNumber(start: Square, end: Square): Int {
  *          bishopTrajectory(Square(1, 3), Square(6, 8)) = listOf(Square(1, 3), Square(6, 8))
  * Если возможно несколько вариантов самой быстрой траектории, вернуть любой из них.
  */
-fun bishopTrajectory(start: Square, end: Square): List<Square> = TODO()
+fun bishopTrajectory(start: Square, end: Square): List<Square> {
+    if (bishopMoveNumber(start, end) == -1) return listOf()
+    if (bishopMoveNumber(start, end) == 0) return listOf(start)
+    if (bishopMoveNumber(start, end) == 1) return listOf(start, end)
+    var n = (end.row + start.row + end.column - start.column) / 2
+    var m = n - start.row + start.column
+    if (n !in 1..8 || m !in 1..8) {
+        n = (end.row + start.row - end.column + start.column) / (2)
+        m = n - end.row + end.column
+    }
+    return listOf(start, Square(m, n), end)
+}
 
-/**
+    /**
  * Средняя
  *
  * Определить число ходов, за которое шахматный король пройдёт из клетки start в клетку end.
