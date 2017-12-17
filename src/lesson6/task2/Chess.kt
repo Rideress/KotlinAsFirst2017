@@ -157,7 +157,7 @@ fun bishopTrajectory(start: Square, end: Square): List<Square> {
             n = (end.row + start.row - end.column + start.column) / 2
             m = n - end.row + end.column
         }
-        return listOf(start, Square(m, n), end
+        return listOf(start, Square(m, n), end)
     }
 }
 
