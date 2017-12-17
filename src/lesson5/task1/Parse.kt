@@ -62,7 +62,7 @@ fun main(args: Array<String>) {
  * При неверном формате входной строки вернуть пустую строку
  */
 fun dateStrToDigit(str: String): String {
-    val month = listOf<String>("января", "февраля", "марта", "апреля", "мая", "июня", "июля",
+    val month = listOf("января", "февраля", "марта", "апреля", "мая", "июня", "июля",
             "августа", "сентября", "октября", "ноября", "декабря")
     val parts = str.split(' ')
     val date = mutableListOf<String>()
@@ -168,14 +168,14 @@ fun plusMinus(expression: String): Int = TODO()
  * Пример: "Он пошёл в в школу" => результат 9 (индекс первого 'в')
  */
 fun firstDuplicateIndex(str: String): Int {
-        val words = str.toLowerCase().split(' ')
-        var index = 0
-        if (words.size == 1) return -1
-        for (i in 0 until words.size - 1) {
-            if (words[i] == words[i + 1]) break
-            else index += words[i].length + 1
-        }
-        return if (index == str.length - 1) -1 else index
+    val words = str.toLowerCase().split(' ')
+    var index = 0
+    if (words.size == 1) return -1
+    for (i in 0 until words.size - 1) {
+        if (words[i] == words[i + 1]) break
+        else index += words[i].length + 1
+    }
+    return if (index == str.length - 1) -1 else index
 }
 
 /**

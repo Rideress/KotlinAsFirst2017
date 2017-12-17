@@ -110,14 +110,10 @@ fun lcm(m: Int, n: Int): Int {
  * Для заданного числа n > 1 найти минимальный делитель, превышающий 1
  */
 fun minDivisor(n: Int): Int {
-    var m = 1
-    val sq = Math.sqrt(n.toDouble()).toInt()
-    for (i in 2..sq + 1) {
-        m++
-        if (n % i == 0) break
-        else if (i == sq + 1) return n
+    for (i in 2..Math.sqrt(n.toDouble()).toInt()) {
+        if (n % i == 0) return i
     }
-    return m
+    return n
 }
 /**
  * Простая
@@ -137,7 +133,7 @@ fun isCoPrime(m: Int, n: Int): Boolean {
     var a = m
     var b = n
     if (a == b && b != 1) return false
-    else while (a != b) {
+    while (a != b) {
         if (a > b) a -= b
         else b -= a
     }
@@ -219,7 +215,7 @@ fun squareSequenceDigit(n: Int): Int {
         numb += digitNumber(i * i)
     }
     var exitNum = i * i
-    for (i in n..(numb - 1)) {
+    for (i in n until (numb - 1)) {
         exitNum /= 10
     }
     return exitNum % 10
@@ -241,7 +237,7 @@ fun fibSequenceDigit(n: Int): Int {
         numb += digitNumber(fib(i))
     }
     var exitNum = fib(i)
-    for (i in n..(numb - 1)) {
+    for (i in n until (numb - 1)) {
         exitNum /= 10
     }
     return exitNum % 10
