@@ -215,7 +215,7 @@ fun squareSequenceDigit(n: Int): Int {
         numb += digitNumber(i * i)
     }
     var exitNum = i * i
-    for (i in n until (numb - 1)) {
+    for (i in n until numb) {
         exitNum /= 10
     }
     return exitNum % 10
@@ -237,7 +237,7 @@ fun fibSequenceDigit(n: Int): Int {
         numb += digitNumber(fib(i))
     }
     var exitNum = fib(i)
-    for (i in n until (numb - 1)) {
+    for (i in n until numb) {
         exitNum /= 10
     }
     return exitNum % 10
